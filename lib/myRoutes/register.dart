@@ -1,0 +1,245 @@
+import 'package:adlitem_flutter/constants/colors.dart';
+import 'package:adlitem_flutter/helpers/AppMessage.dart';
+import 'package:adlitem_flutter/myRoutes/provider/register_provider.dart';
+import 'package:adlitem_flutter/myStyles/app_styles.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:adlitem_flutter/myRoutes/client/register_client.dart';
+
+class Register extends StatefulWidget {
+  Register({Key? key, required this.title}) : super(key: key);
+  final String title;
+
+  @override
+  State<Register> createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register> {
+  String client = "";
+  String provider = "";
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          bottom: TabBar(
+            labelColor: WHITE,
+            indicator: BoxDecoration(
+              color: Colors.lightBlue,
+              border: Border.all(width: 3, color: APP_COLORS.Primary),
+              borderRadius: BorderRadius.circular(50),
+            ),
+            tabs: [
+              Tab(
+                child: Text("Provider"),
+              ),
+              Tab(
+                child: Text("Client"),
+              ),
+            ],
+          ),
+          title: Text(
+            'Adlitem SignUp Options',
+            //style: Style_HeaderText(),
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            RegisterProvider(),
+            RegisterClient(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  TextRegister(type) {
+    if (type == "PROVIDER") {
+      return Text(
+        "You will be pleased to find in Adlitem the opportunity to offer your services in the legal industry, at  your own rate, the one that’s fair for you and right for your qualifications without any intermediaries. With us, you can "
+        "adjust your rates to meet the market requirements every time you "
+        "need to, you can build up on "
+        "your own network of clients allowing them to reach you first "
+        "every time they post a job.",
+        style: Style_ALLText_md(),
+        textAlign: TextAlign.justify,
+      );
+    } else {
+      return Text(
+        "Works with independent providers at their "
+        "personal rates to promote competitiveness and quality and offer "
+        "a cost efficient support to your litigation. Whether it’s a "
+        "court reporter, interpreter or translator that you need, you may "
+        "find it in our network: the right one for your case, at the"
+        "right price.",
+        style: Style_ALLText_md(),
+        textAlign: TextAlign.justify,
+      );
+    }
+  }
+
+  RegisterProvider() {
+    return Scaffold(
+        floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {
+              if (provider == "" || provider == Null) {
+                AppMessage.ShowError("Select a provider option", context);
+                return;
+              }
+              // _showMaterialDialogProvider(provider);
+              Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                      builder: (context) =>
+                          RegisterProviderDialog(ProType: provider)));
+            },
+            label: const Text('Next'),
+            icon: const Icon(Icons.arrow_forward),
+            backgroundColor: APP_COLORS.Primary),
+        body: SingleChildScrollView(
+          child: Column(children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Center(
+                  child: Container(
+                    padding: EdgeInsets.only(top: 10),
+                    width: 320,
+                    child: Flex(
+                        direction: Axis.horizontal,
+                        children: [Expanded(child: TextRegister("PROVIDER"))]),
+                  ),
+                ),
+              ],
+            ),
+            Divider(),
+            RadioListTile(
+              title: Text("Interpreter"),
+              value: "Interpreter",
+              groupValue: this.provider,
+              onChanged: (value) {
+                setState(() {
+                  this.provider = value.toString();
+                });
+              },
+            ),
+            RadioListTile(
+              title: Text("Court Reporter"),
+              value: "CourtReporter",
+              groupValue: provider,
+              onChanged: (value) {
+                setState(() {
+                  provider = value.toString();
+                });
+              },
+            ),
+            RadioListTile(
+              title: Text("Translator"),
+              value: "Translator",
+              groupValue: provider,
+              onChanged: (value) {
+                setState(() {
+                  provider = value.toString();
+                });
+              },
+            ),
+            RadioListTile(
+              title: Text("Substitute Attorney"),
+              value: "Substitute Attorney",
+              groupValue: provider,
+              onChanged: (value) {
+                setState(() {
+                  provider = value.toString();
+                });
+              },
+            ),
+          ]),
+        ));
+  }
+
+  RegisterClient() {
+    return Scaffold(
+        floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {
+              if (client == "" || client == Null) {
+                AppMessage.ShowError("Select a client option", context);
+                return;
+              }
+              // _showMaterialDialogClient(client);
+              Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                      builder: (context) =>
+                          RegisterClientDialog(CliType: client)));
+            },
+            label: const Text('Next'),
+            icon: const Icon(Icons.arrow_forward),
+            backgroundColor: APP_COLORS.Primary),
+        body: SingleChildScrollView(
+          child: Column(children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Center(
+                  child: Container(
+                    padding: EdgeInsets.only(top: 10),
+                    width: 320,
+                    child: Flex(
+                        direction: Axis.horizontal,
+                        children: [Expanded(child: TextRegister("CLIENT"))]),
+                  ),
+                ),
+              ],
+            ),
+            Divider(),
+            RadioListTile(
+              title: Text("Law Firm"),
+              value: "LawFirm",
+              groupValue: client,
+              onChanged: (value) {
+                setState(() {
+                  client = value.toString();
+                  //print(client);
+                });
+              },
+            ),
+            RadioListTile(
+              title: Text("Attorney"),
+              value: "Attorney",
+              groupValue: client,
+              onChanged: (value) {
+                setState(() {
+                  client = value.toString();
+                  //print(client);
+                });
+              },
+            ),
+            SizedBox(height: 144),
+          ]),
+        ));
+  }
+
+  // void _showMaterialDialogProvider(String pro) {
+  //   showCupertinoModalPopup(
+  //       context: context,
+  //       builder: (BuildContext context) =>
+  //           Dialog(child: RegisterProviderDialog(ProType: pro)),
+  //       barrierDismissible: true,
+  //       barrierColor: BARRIERCOLOR);
+  // }
+
+  // void _showMaterialDialogClient(String cli) {
+  //   showCupertinoModalPopup(
+  //     context: context,
+  //     builder: (BuildContext context) => Dialog(
+  //         child: GestureDetector(
+  //             child: RegisterClientDialog(
+  //       CliType: cli,
+  //     ))),
+  //     barrierDismissible: true,
+  //     barrierColor: BARRIERCOLOR,
+  //   );
+  // }
+}
