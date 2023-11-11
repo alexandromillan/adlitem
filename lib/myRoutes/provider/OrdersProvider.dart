@@ -104,7 +104,7 @@ class _OrdersProviderState extends State<OrdersProvider> {
     } else if (order['status'] == "parcialClient") {
       await OrderProcessedService().UpdateStatus(order['orderId'], 'open');
     } else if (order['status'] == "parcialProvider") {
-      AppMessage.ShowInfo("You already started this session", context);
+      AppMessage.ShowInfo("You already started this assignment", context);
     }
 
     await readList();
@@ -447,7 +447,7 @@ class _OrdersProviderState extends State<OrdersProvider> {
     AlertDialog alert = AlertDialog(
       title: Text("Confirm"),
       content: Text(
-        "Really want to confirm presence ?",
+        "Please confirm you are ready for assignment",
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
       actions: [
@@ -825,7 +825,7 @@ class _OrdersProviderState extends State<OrdersProvider> {
                                   style: TextStyle(color: Colors.purple),
                                 )
                               : Text(
-                                  "Finish Session",
+                                  "Finish Assignment",
                                   style: TextStyle(color: Colors.purple),
                                 )
                         ],
@@ -843,7 +843,7 @@ class _OrdersProviderState extends State<OrdersProvider> {
                         } else if (item['status'] == "parcialProvider") {
                           Navigator.pop(context);
                           AppMessage.ShowInfo(
-                              "You already started  this session", context);
+                              "You already started  this assignment", context);
                         } else {
                           print("Cerrando Orden");
                           showDialgFinishOrder(item);

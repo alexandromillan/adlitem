@@ -213,94 +213,48 @@ class _OrderListState extends State<OrderList> {
                                           ],
                                         ),
                                         list['data'][index]['status'] ==
-                                                    "PENDING" ||
-                                                list['data'][index]['status'] ==
-                                                    "FREE" ||
-                                                list['data'][index]['status'] ==
-                                                    "BLOCKED"
+                                                "PENDING"
                                             ? Padding(
                                                 padding:
                                                     EdgeInsets.only(top: 5),
                                                 child: Image.asset(
-                                                  "assets/images/available.png",
+                                                  "assets/images/publish.png",
                                                   width: 80,
                                                   height: 60,
                                                 ),
                                               )
-                                            : (list['data'][index]['estado'] ==
-                                                    "open"
+                                            : list['data'][index]['status'] ==
+                                                        "FREE" ||
+                                                    list['data'][index]
+                                                            ['status'] ==
+                                                        "BLOCKED"
                                                 ? Padding(
-                                                    padding: EdgeInsets.only(
-                                                        right: 30),
-                                                    child: Icon(
-                                                      BootstrapIcons.check2_all,
-                                                      color: Colors.green,
-                                                      size: 25,
+                                                    padding:
+                                                        EdgeInsets.only(top: 5),
+                                                    child: Image.asset(
+                                                      "assets/images/available.png",
+                                                      width: 80,
+                                                      height: 60,
                                                     ),
                                                   )
-                                                : list['data'][index]
+                                                : (list['data'][index]
                                                             ['estado'] ==
-                                                        "parcialProvider"
+                                                        "open"
                                                     ? Padding(
                                                         padding:
                                                             EdgeInsets.only(
-                                                                top: 5),
-                                                        child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            Text(
-                                                              list['data'][
-                                                                          index]
-                                                                      [
-                                                                      'target'] +
-                                                                  " is on poisition",
-                                                              style: TextStyle(
-                                                                  fontSize: 10),
-                                                            ),
-                                                            // Icon(
-                                                            //   BootstrapIcons
-                                                            //       .check2_circle,
-                                                            //   color: APP_COLORS
-                                                            //       .Primary,
-                                                            //   size: 20,
-                                                            // ),
-                                                          ],
-                                                        ))
+                                                                right: 30),
+                                                        child: Icon(
+                                                          BootstrapIcons
+                                                              .check2_all,
+                                                          color: Colors.green,
+                                                          size: 25,
+                                                        ),
+                                                      )
                                                     : list['data'][index]
                                                                 ['estado'] ==
-                                                            "closed"
-                                                        ? (Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    top: 5,
-                                                                    right: 30),
-                                                            child: Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                // Text(
-                                                                //   "Order is CLosed",
-                                                                //   style: TextStyle(
-                                                                //       fontSize:
-                                                                //           10),
-                                                                // ),
-                                                                Icon(
-                                                                  Icons.lock,
-                                                                  color: APP_COLORS
-                                                                      .Success,
-                                                                  size: 25,
-                                                                ),
-                                                              ],
-                                                            )))
-                                                        : (Padding(
+                                                            "parcialProvider"
+                                                        ? Padding(
                                                             padding:
                                                                 EdgeInsets.only(
                                                                     top: 5),
@@ -317,20 +271,78 @@ class _OrderListState extends State<OrderList> {
                                                                               index]
                                                                           [
                                                                           'target'] +
-                                                                      " is out of the area",
+                                                                      "is ready, please confirm to start",
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           10),
                                                                 ),
                                                                 // Icon(
-                                                                //   Icons.cancel,
-                                                                //   color:
-                                                                //       APP_COLORS
-                                                                //           .Danger,
+                                                                //   BootstrapIcons
+                                                                //       .check2_circle,
+                                                                //   color: APP_COLORS
+                                                                //       .Primary,
                                                                 //   size: 20,
                                                                 // ),
                                                               ],
-                                                            )))),
+                                                            ))
+                                                        : list['data'][index][
+                                                                    'estado'] ==
+                                                                "closed"
+                                                            ? (Padding(
+                                                                padding: EdgeInsets.only(
+                                                                    top: 5,
+                                                                    right: 30),
+                                                                child: Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    // Text(
+                                                                    //   "Order is CLosed",
+                                                                    //   style: TextStyle(
+                                                                    //       fontSize:
+                                                                    //           10),
+                                                                    // ),
+                                                                    Icon(
+                                                                      Icons
+                                                                          .lock,
+                                                                      color: APP_COLORS
+                                                                          .Success,
+                                                                      size: 25,
+                                                                    ),
+                                                                  ],
+                                                                )))
+                                                            : (Padding(
+                                                                padding: EdgeInsets.only(top: 5),
+                                                                child: Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Text(
+                                                                      list['data'][index]
+                                                                              [
+                                                                              'target'] +
+                                                                          " is out of the area",
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              10),
+                                                                    ),
+                                                                    // Icon(
+                                                                    //   Icons.cancel,
+                                                                    //   color:
+                                                                    //       APP_COLORS
+                                                                    //           .Danger,
+                                                                    //   size: 20,
+                                                                    // ),
+                                                                  ],
+                                                                )))),
                                       ])),
                             ],
                           ),
@@ -563,11 +575,11 @@ class _OrderListState extends State<OrderList> {
                                 ),
                                 (item['estado'] != "open")
                                     ? Text(
-                                        "Confirm Precense",
+                                        "Confirm Presence",
                                         style: TextStyle(color: Colors.purple),
                                       )
                                     : Text(
-                                        "Finish Session",
+                                        "Finish Assignment",
                                         style: TextStyle(color: Colors.purple),
                                       )
                               ],
@@ -585,7 +597,7 @@ class _OrderListState extends State<OrderList> {
                               } else if (item['estado'] == "parcialClient") {
                                 Navigator.pop(context);
                                 AppMessage.ShowInfo(
-                                    "You already started  this session",
+                                    "You already started  this assignment",
                                     context);
                               } else {
                                 showDialgFinishOrder(item);
@@ -654,7 +666,7 @@ class _OrderListState extends State<OrderList> {
                                           width: 10,
                                         ),
                                         Text(
-                                          "Finish Session",
+                                          "Finish Assignment",
                                           style:
                                               TextStyle(color: Colors.purple),
                                         )
@@ -887,7 +899,7 @@ class _OrderListState extends State<OrderList> {
     AlertDialog alert = AlertDialog(
       title: Text("Confirm"),
       content: Text(
-        "Really want to confirm your presence ?",
+        "Please confirm you are ready for assignment",
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
       actions: [
@@ -1140,7 +1152,7 @@ class _OrderListState extends State<OrderList> {
                                         hintStyle: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w400,
-                                          color: Colors.grey,
+                                          color: Colors.brown[900],
                                         ),
                                       ),
                                       style: TextStyle(
