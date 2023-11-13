@@ -77,23 +77,33 @@ class _MyAppState extends State<MyApp> {
       onGenerateRoute: routes,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        appBarTheme:
-            AppBarTheme(backgroundColor: APP_COLORS.Primary, centerTitle: true),
-        primaryColor: APP_COLORS.Primary,
+        appBarTheme: AppBarTheme(
+            titleTextStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold),
+            backgroundColor: APP_COLORS.Primary,
+            centerTitle: true),
+        //primaryColor: Colors.amber,
         hintColor: Colors.grey,
         popupMenuTheme: PopupMenuThemeData(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
         textTheme: const TextTheme(
-            displayLarge:
-                TextStyle(fontSize: 50.0, fontWeight: FontWeight.bold),
+            displayLarge: TextStyle(
+                color: Colors.white,
+                fontSize: 50.0,
+                fontWeight: FontWeight.bold),
             titleLarge: TextStyle(
+                color: Colors.white,
                 fontSize: 16.0,
                 fontStyle: FontStyle.normal,
                 fontWeight: FontWeight.bold),
             bodyMedium: TextStyle(fontSize: 16.0, fontFamily: 'Arial'),
-            displaySmall:
-                TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold)),
+            displaySmall: TextStyle(
+                color: Colors.white,
+                fontSize: 12.0,
+                fontWeight: FontWeight.bold)),
       ),
       home: Scaffold(
         body: Container(

@@ -41,7 +41,7 @@ class _KLoginState extends State<KLogin> {
             .Login(data!.value['email'], data!.value['password']);
         //print(res['data']);
         if (res['success'] == -1) {
-          AppMessage.ShowError(res, context);
+          AppMessage.ShowError(res['message'], context);
           setState(() {
             isLoading = !isLoading;
           });
@@ -51,8 +51,20 @@ class _KLoginState extends State<KLogin> {
             isLoading = !isLoading;
           });
         } else if (res['success'] == 1) {
-          if (mounted)
+          //print(res['data']['userGroup']);
+          if (mounted) {
+            // var usrData = new SystemAccount();
+            // usrData.userGroup = res['data']['userGroup'];
+            // usrData.verificationToken = res['token'];
+            // usrData.systemaccountId = res['data']['systemaccountId'];
+            // usrData.name = res['data']['name'];
+            // usrData.lastname = res['data']['lastname'];
+            // usrData.email = res['data']['email'];
+            // usrData.rate = res['data']['rate'];
+            // usrData.cancelAgree =
+            //     res['data']['cancelAgree'] == 1 ? true : false;
             setState(() {
+              //user = usrData;
               user.userGroup = res['data']['userGroup'];
               user.verificationToken = res['token'];
               user.systemaccountId = res['data']['systemaccountId'];
@@ -62,7 +74,7 @@ class _KLoginState extends State<KLogin> {
               user.rate = res['data']['rate'];
               user.cancelAgree = res['data']['cancelAgree'] == 1 ? true : false;
             });
-
+          }
           context.read<AppProvider>().login(user);
 
           if (mounted) {
@@ -72,7 +84,7 @@ class _KLoginState extends State<KLogin> {
             });
           }
         } else {
-          AppMessage.ShowError(res, context);
+          AppMessage.ShowError(res['message'], context);
         }
       }
     } catch (ex) {
@@ -80,7 +92,7 @@ class _KLoginState extends State<KLogin> {
         setState(() {
           isLoading = !isLoading;
         });
-      AppMessage.ShowError(ex, context);
+      AppMessage.ShowError(ex.toString(), context);
     }
   }
 

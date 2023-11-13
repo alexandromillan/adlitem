@@ -1,5 +1,6 @@
 import 'package:adlitem_flutter/constants/colors.dart';
 import 'package:adlitem_flutter/constants/environment.dart';
+import 'package:adlitem_flutter/helpers/AppMessage.dart';
 import 'package:adlitem_flutter/helpers/WebSocket.dart';
 import 'package:adlitem_flutter/models/systemAccount.dart';
 import 'package:adlitem_flutter/myRoutes/client/ProviderOverview.dart';
@@ -68,8 +69,8 @@ class ClientMapState extends State<ClientMap> {
       for (int i = 0; i < res['data'].length; i++) {
         //print(res['data'][i]);
         tempMarkers.add(new Marker(
-            width: 250,
-            height: 250,
+            width: 160,
+            height: 160,
             rotate: true,
             point:
                 LatLng(res['data'][i]['latitude'], res['data'][i]['longitude']),
@@ -89,7 +90,7 @@ class ClientMapState extends State<ClientMap> {
                           res['data'][i]['providerGroup'],
                           style: TextStyle(fontSize: 12),
                         ),
-                        foregroundColor: Colors.yellow[200],
+                        foregroundColor: Colors.yellow[160],
                         backgroundColor: APP_COLORS.Primary,
                         icon: Icon(
                           Icons.person_4_rounded,
@@ -113,67 +114,101 @@ class ClientMapState extends State<ClientMap> {
     //print(markers);
   }
 
+  void _abrirContato() {
+    AppMessage.ShowInfo("TAP", "TAP BUTTON");
+  }
+
   @override
   Widget build(BuildContext context) {
     //CreateMarkersProviders();
     return Scaffold(
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
-            Navigator.push(
-              context,
-              CupertinoPageRoute(
-                  builder: (context) => CreateOrder(reloadCallBack: null)),
-            );
-          },
-          elevation: 0,
-          backgroundColor: APP_COLORS.Primary,
-          label: Text("Add Job"),
-          icon: Icon(Icons.add_card),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Navigator.push(
+            context,
+            CupertinoPageRoute(
+                builder: (context) => CreateOrder(reloadCallBack: null)),
+          );
+        },
+        elevation: 0,
+        backgroundColor: APP_COLORS.Primary,
+        label: Text(
+          "Add Job",
+          style: TextStyle(color: Colors.white),
         ),
-        body: Center(
-            child: Container(
-                child: FlutterMap(
-          options: MapOptions(
-              center: LatLng((LATITUDE), (LONGITUDE)),
-              interactiveFlags: InteractiveFlag.all,
-              zoom: 9,
-              maxZoom: 15,
-              rotation: 0,
-              scrollWheelVelocity: 0.005,
-              enableMultiFingerGestureRace: true,
-              enableScrollWheel: true),
-          children: <Widget>[
-            TileLayer(
-              urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-              subdomains: const ['a', 'b', 'c'],
+        icon: Icon(
+          Icons.add_card,
+          color: Colors.white,
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(50),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Image.asset(
+              "images/office.png",
+              width: 160,
+              height: 160,
             ),
-            MarkerClusterLayerWidget(
-              options: MarkerClusterLayerOptions(
-                maxClusterRadius: 80,
-                size: Size(40, 40),
-                anchor: AnchorPos.align(AnchorAlign.center),
-                fitBoundsOptions: FitBoundsOptions(
-                    padding: EdgeInsets.all(50),
-                    maxZoom: 15,
-                    //forceIntegerZoomLevel: false,
-                    inside: false),
-                markers: markers,
-                builder: (context, markers) {
-                  return Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: APP_COLORS.Primary),
-                    child: Center(
-                      child: Text(
-                        markers.length.toString(),
-                        style: const TextStyle(color: Colors.white),
+            Padding(
+              padding: const EdgeInsets.only(top: 50, left: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  GestureDetector(
+                    //onTap: _abrirEmpresa,
+                    child: Image.asset(
+                      "images/provider.png",
+                      width: 160,
+                      height: 160,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: _abrirContato,
+                    child: Image.asset(
+                      "images/ordenes.png",
+                      width: 160,
+                      height: 160,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 50, left: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Stack(
+                    children: [
+                      GestureDetector(
+                        // onTap: _abrirCliente,
+                        child: Image.asset(
+                          "images/notificacion.png",
+                          width: 160,
+                          height: 160,
+                        ),
+                      )
+                    ],
+                  ),
+                  Stack(children: [
+                    GestureDetector(
+                      onTap: _abrirContato,
+                      child: Image.asset(
+                        "images/config.png",
+                        width: 160,
+                        height: 160,
                       ),
                     ),
-                  );
-                },
+                  ]),
+                ],
               ),
             ),
           ],
-        ))));
+        ),
+      ),
+    );
   }
 }

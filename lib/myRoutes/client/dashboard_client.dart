@@ -128,7 +128,7 @@ class _DashboardClientState extends State<DashboardClient> {
         // centerTitle: true,
         title: const Text(
           "Client Dashboard",
-          // style: TextStyle(fontSize: 20.0, color: WHITE),
+          style: TextStyle(fontSize: 20.0, color: Colors.white),
         ),
         actions: [
           Padding(

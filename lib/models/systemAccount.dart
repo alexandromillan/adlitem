@@ -23,7 +23,7 @@ class SystemAccount {
   String website = '';
   String fax = '';
   bool membre = false;
-  double rate = 0;
+  double rate = 0.1;
   bool isLogged = false;
   bool cancelAgree = false;
 
