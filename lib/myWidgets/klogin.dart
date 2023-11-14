@@ -53,16 +53,6 @@ class _KLoginState extends State<KLogin> {
         } else if (res['success'] == 1) {
           //print(res['data']['userGroup']);
           if (mounted) {
-            // var usrData = new SystemAccount();
-            // usrData.userGroup = res['data']['userGroup'];
-            // usrData.verificationToken = res['token'];
-            // usrData.systemaccountId = res['data']['systemaccountId'];
-            // usrData.name = res['data']['name'];
-            // usrData.lastname = res['data']['lastname'];
-            // usrData.email = res['data']['email'];
-            // usrData.rate = res['data']['rate'];
-            // usrData.cancelAgree =
-            //     res['data']['cancelAgree'] == 1 ? true : false;
             setState(() {
               //user = usrData;
               user.userGroup = res['data']['userGroup'];
@@ -92,7 +82,7 @@ class _KLoginState extends State<KLogin> {
         setState(() {
           isLoading = !isLoading;
         });
-      AppMessage.ShowError(ex.toString(), context);
+      AppMessage.ShowError("Error, couldn't login", context);
     }
   }
 
@@ -159,7 +149,7 @@ class _KLoginState extends State<KLogin> {
                       height: 10,
                     ),
                     FormBuilderTextField(
-                      initialValue: "123456",
+                      initialValue: "123456789",
                       decoration: InputDecoration(
                         floatingLabelBehavior: FloatingLabelBehavior.always,
                         labelText: 'Password',
