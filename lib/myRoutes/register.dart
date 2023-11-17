@@ -25,18 +25,34 @@ class _RegisterState extends State<Register> {
       child: Scaffold(
         appBar: AppBar(
           bottom: TabBar(
-            labelColor: WHITE,
+            labelColor: Colors.redAccent,
+            unselectedLabelColor: Colors.white,
+            indicatorSize: TabBarIndicatorSize.label,
             indicator: BoxDecoration(
-              color: Colors.lightBlue,
-              border: Border.all(width: 3, color: APP_COLORS.Primary),
-              borderRadius: BorderRadius.circular(50),
-            ),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10)),
+                color: Colors.white),
             tabs: [
               Tab(
-                child: Text("Provider"),
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.transparent, width: 1)),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text("Provider"),
+                  ),
+                ),
               ),
               Tab(
-                child: Text("Client"),
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.transparent, width: 1)),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text("Client"),
+                  ),
+                ),
               ),
             ],
           ),
@@ -96,6 +112,7 @@ class _RegisterState extends State<Register> {
                           RegisterProviderDialog(ProType: provider)));
             },
             label: const Text('Next'),
+            foregroundColor: Colors.white,
             icon: const Icon(Icons.arrow_forward),
             backgroundColor: APP_COLORS.Primary),
         body: SingleChildScrollView(
@@ -103,13 +120,28 @@ class _RegisterState extends State<Register> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Center(
-                  child: Container(
-                    padding: EdgeInsets.only(top: 10),
-                    width: 320,
-                    child: Flex(
-                        direction: Axis.horizontal,
-                        children: [Expanded(child: TextRegister("PROVIDER"))]),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: Container(
+                      padding: EdgeInsets.only(
+                          left: 20, right: 20, top: 20, bottom: 20),
+                      //margin: EdgeInsets.all(5),
+                      width: 480,
+                      decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 223, 226, 227),
+                          borderRadius: BorderRadius.circular(30.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromARGB(255, 154, 102, 4),
+                              offset: Offset(7, 7),
+                              blurRadius: 6,
+                            ),
+                          ]),
+                      child: Flex(direction: Axis.horizontal, children: [
+                        Expanded(child: TextRegister("PROVIDER"))
+                      ]),
+                    ),
                   ),
                 ),
               ],
@@ -175,6 +207,7 @@ class _RegisterState extends State<Register> {
                           RegisterClientDialog(CliType: client)));
             },
             label: const Text('Next'),
+            foregroundColor: Colors.white,
             icon: const Icon(Icons.arrow_forward),
             backgroundColor: APP_COLORS.Primary),
         body: SingleChildScrollView(
@@ -182,13 +215,28 @@ class _RegisterState extends State<Register> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Center(
-                  child: Container(
-                    padding: EdgeInsets.only(top: 10),
-                    width: 320,
-                    child: Flex(
-                        direction: Axis.horizontal,
-                        children: [Expanded(child: TextRegister("CLIENT"))]),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: Container(
+                      padding: EdgeInsets.only(
+                          left: 20, right: 20, top: 20, bottom: 20),
+                      //margin: EdgeInsets.all(5),
+                      width: 480,
+                      decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 223, 226, 227),
+                          borderRadius: BorderRadius.circular(30.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromARGB(255, 154, 102, 4),
+                              offset: Offset(7, 7),
+                              blurRadius: 6,
+                            ),
+                          ]),
+                      child: Flex(
+                          direction: Axis.horizontal,
+                          children: [Expanded(child: TextRegister("CLIENT"))]),
+                    ),
                   ),
                 ),
               ],

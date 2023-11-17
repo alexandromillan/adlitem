@@ -295,6 +295,7 @@ class ProviderMapState extends State<ProviderMap> {
                 }
               },
               label: Text("Disconnect"),
+              foregroundColor: Colors.white,
               icon: Icon(BootstrapIcons.plug_fill),
               backgroundColor: Colors.green[400])
           : FloatingActionButton.extended(
@@ -344,6 +345,7 @@ class ProviderMapState extends State<ProviderMap> {
                 ));
               },
               label: const Text('Connect'),
+              foregroundColor: Colors.white,
               icon: const Icon(BootstrapIcons.plug),
               backgroundColor: Color.fromARGB(255, 67, 37, 173)),
     );

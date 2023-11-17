@@ -1,11 +1,13 @@
+import 'package:adlitem_flutter/models/systemAccount.dart';
 import 'package:adlitem_flutter/myRoutes/client/dashboard_client.dart';
 import 'package:adlitem_flutter/myRoutes/provider/dashboard_provider.dart';
+import 'package:adlitem_flutter/myRoutes/terms_conditions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Layout extends StatefulWidget {
-  final String role;
-  const Layout({Key? key, required this.role}) : super(key: key);
+  final SystemAccount user;
+  const Layout({Key? key, required this.user}) : super(key: key);
 
   @override
   State<Layout> createState() => _LayoutState();
@@ -14,10 +16,14 @@ class Layout extends StatefulWidget {
 class _LayoutState extends State<Layout> {
   @override
   Widget build(BuildContext context) {
-    if (widget.role == "CLI") {
-      return DashboardClient();
+    if (!widget.user.cancelAgree) {
+      return TermsConditions();
     } else {
-      return DashboardProvider();
+      if (widget.user.userGroup == "CLI") {
+        return DashboardClient();
+      } else {
+        return DashboardProvider();
+      }
     }
   }
 }

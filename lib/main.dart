@@ -1,6 +1,5 @@
 import 'package:adlitem_flutter/models/systemAccount.dart';
 import 'package:adlitem_flutter/myRoutes/layout.dart';
-import 'package:adlitem_flutter/myRoutes/terms_conditions.dart';
 import 'package:adlitem_flutter/myWidgets/klogin.dart';
 import 'package:adlitem_flutter/providers/AppProvider.dart';
 import 'package:adlitem_flutter/services/SystemAccountService.dart';
@@ -116,13 +115,13 @@ class _MyAppState extends State<MyApp> {
                 child: Column(
                   children: [
                     Container(
-                        height: size.height,
-                        child: !app.user.isLogged
-                            ? KLogin()
-                            : TermsContidions() //Layout(role: app.user.userGroup),
-                        // child: InternetConectivity(
-                        //     widget: KLogin(title: "Welcome to Adlitem")),
-                        )
+                      height: size.height,
+                      child: !app.user.isLogged
+                          ? KLogin()
+                          : Layout(user: app.user),
+                      // child: InternetConectivity(
+                      //     widget: KLogin(title: "Welcome to Adlitem")),
+                    )
                   ],
                 ),
               ),

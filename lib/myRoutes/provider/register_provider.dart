@@ -218,6 +218,7 @@ class _RegisterProviderDialogState extends State<RegisterProviderDialog> {
             }
           },
           label: const Text('Register'),
+          foregroundColor: Colors.white,
           icon: const Icon(Icons.check),
           backgroundColor: APP_COLORS.Primary),
     );

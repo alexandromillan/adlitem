@@ -1,8 +1,10 @@
 import 'package:adlitem_flutter/constants/colors.dart';
 import 'package:adlitem_flutter/helpers/AppMessage.dart';
+import 'package:adlitem_flutter/helpers/Devices.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:adlitem_flutter/models/systemAccount.dart';
 import 'package:adlitem_flutter/myRoutes/register.dart';
+import 'package:adlitem_flutter/myRoutes/terms_conditions.dart';
 import 'package:adlitem_flutter/myRoutes/forgot_password.dart';
 import 'package:adlitem_flutter/services/AuthenticationService.dart';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
@@ -27,6 +29,7 @@ class KLogin extends StatefulWidget {
 class _KLoginState extends State<KLogin> {
   final _formKey = GlobalKey<FormBuilderState>();
   late IOWebSocketChannel channel;
+  var device = Devices().isDesktop;
 
   bool isLoading = false;
   SystemAccount user = new SystemAccount();
@@ -65,6 +68,14 @@ class _KLoginState extends State<KLogin> {
               user.cancelAgree = res['data']['cancelAgree'] == 1 ? true : false;
             });
           }
+
+          if (!user.cancelAgree) {
+            Navigator.push(
+              context,
+              CupertinoPageRoute(builder: (context) => TermsConditions()),
+              //Register(title: "")),
+            );
+          }
           context.read<AppProvider>().login(user);
 
           if (mounted) {
@@ -95,13 +106,16 @@ class _KLoginState extends State<KLogin> {
     //   //MyHomePageState.noResponse = true;
     // }
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
         backgroundColor: Colors.white,
         resizeToAvoidBottomInset: false,
         body: Stack(alignment: FractionalOffset.center, children: [
           Container(
               height: size.height,
-              padding: EdgeInsets.all(30),
+              padding: device
+                  ? EdgeInsets.only(left: size.width / 3, right: size.width / 3)
+                  : EdgeInsets.all(10),
               alignment: Alignment.center,
               child: FormBuilder(
                 key: _formKey,
@@ -225,8 +239,10 @@ class _KLoginState extends State<KLogin> {
                                 Navigator.push(
                                   context,
                                   CupertinoPageRoute(
-                                      builder: (context) =>
-                                          Register(title: "")),
+                                      builder: (context) => Register(
+                                            title: "",
+                                          )),
+                                  //Register(title: "")),
                                 );
                               },
                               child: Text("Sign Up for free")),

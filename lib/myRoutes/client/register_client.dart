@@ -6,6 +6,7 @@ import 'package:adlitem_flutter/main.dart';
 import 'package:adlitem_flutter/myWidgets/klogin.dart';
 import 'package:adlitem_flutter/services/AuthenticationService.dart';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -205,6 +206,7 @@ class _RegisterClientDialogState extends State<RegisterClientDialog> {
             }
           },
           label: const Text('Register'),
+          foregroundColor: Colors.white,
           icon: const Icon(Icons.check),
           backgroundColor: APP_COLORS.Primary),
     );

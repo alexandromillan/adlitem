@@ -1,10 +1,12 @@
 //import 'package:adlitem_flutter/constants/environment.dart';
 import 'package:adlitem_flutter/helpers/WebSocket.dart';
 import 'package:adlitem_flutter/models/systemAccount.dart';
+import 'package:adlitem_flutter/myRoutes/terms_conditions.dart';
 import 'package:adlitem_flutter/myWidgets/mydrawer.dart';
 import 'package:adlitem_flutter/providers/AppProvider.dart';
 import 'package:adlitem_flutter/services/NotificationService.dart';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +28,7 @@ class DashboardClient extends StatefulWidget {
 class _DashboardClientState extends State<DashboardClient> {
   var notifications = [];
   late SystemAccount user;
+  bool cancelationAgree = false;
 
   final IO.Socket socket = WebSocketApp().SetConnection();
   _connectocket() {
@@ -48,6 +51,7 @@ class _DashboardClientState extends State<DashboardClient> {
   @override
   void initState() {
     super.initState();
+    //checkTerms();
     _connectocket();
   }
 
@@ -56,6 +60,18 @@ class _DashboardClientState extends State<DashboardClient> {
     super.dispose();
     //socket.disconnect();
   }
+
+  // void checkTerms() {
+  //   SystemAccount u = context.read<AppProvider>().getLoggedUser();
+
+  //   if (!u.cancelAgree) {
+  //     Navigator.push(
+  //       context,
+  //       CupertinoPageRoute(builder: (context) => TermsConditions()),
+  //       //Register(title: "")),
+  //     );
+  //   }
+  // }
 
   void readNotifications() async {
     SystemAccount u = context.read<AppProvider>().getLoggedUser();
@@ -94,6 +110,10 @@ class _DashboardClientState extends State<DashboardClient> {
   }
 
   Widget buildItem(element) {
+    SystemAccount u = context.read<AppProvider>().getLoggedUser();
+    setState(() {
+      cancelationAgree = u.cancelAgree;
+    });
     return Container(
       //color: Color.fromRGBO(224, 251, 253, 1.0),
       child: ListTile(

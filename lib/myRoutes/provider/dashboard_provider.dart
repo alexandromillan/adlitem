@@ -14,6 +14,7 @@ import 'package:adlitem_flutter/myRoutes/provider/TabsContent/ProcedingCover.dar
 import 'package:adlitem_flutter/myRoutes/provider/TabsContent/rates_requirements/ListRequirements.dart';
 import 'package:adlitem_flutter/myRoutes/provider/TabsContent/rates_requirements/Requirements.dart';
 import 'package:adlitem_flutter/myRoutes/provider/providerMap.dart';
+import 'package:adlitem_flutter/myRoutes/terms_conditions.dart';
 import 'package:adlitem_flutter/myWidgets/mydrawer.dart';
 import 'package:adlitem_flutter/providers/AppProvider.dart';
 import 'package:adlitem_flutter/services/NotificationService.dart';
@@ -167,6 +168,7 @@ class _DashboardProviderState extends State<DashboardProvider> {
     setState(() {
       cancelationAgree = u.cancelAgree;
     });
+
     //readNotifications();
     return DefaultTabController(
         length: 6,
@@ -200,21 +202,82 @@ class _DashboardProviderState extends State<DashboardProvider> {
                 "Provider Dashboard",
                 style: TextStyle(fontSize: 15.0, color: WHITE),
               ),
-              backgroundColor: APP_COLORS.Primary,
               bottom: TabBar(
-                labelColor: WHITE,
+                labelColor: Colors.redAccent,
+                unselectedLabelColor: Colors.white,
+                indicatorSize: TabBarIndicatorSize.label,
                 indicator: BoxDecoration(
-                  color: Colors.lightBlue,
-                  border: Border.all(width: 3, color: APP_COLORS.Primary),
-                  borderRadius: BorderRadius.circular(50),
-                ),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10)),
+                    color: Colors.white),
                 tabs: [
-                  Tab(icon: Icon(Icons.dashboard)),
-                  Tab(icon: Icon(Icons.event)),
-                  Tab(icon: Icon(Icons.location_pin)),
-                  Tab(icon: Icon(Icons.translate)),
-                  Tab(icon: Icon(BootstrapIcons.mortarboard)),
-                  Tab(icon: Icon(Icons.work_outline)),
+                  Tab(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Colors.transparent, width: 1)),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Icon(Icons.dashboard),
+                      ),
+                    ),
+                  ),
+                  Tab(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Colors.transparent, width: 1)),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Icon(Icons.event),
+                      ),
+                    ),
+                  ),
+                  Tab(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Colors.transparent, width: 1)),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Icon(Icons.location_pin),
+                      ),
+                    ),
+                  ),
+                  Tab(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Colors.transparent, width: 1)),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Icon(Icons.translate),
+                      ),
+                    ),
+                  ),
+                  Tab(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Colors.transparent, width: 1)),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Icon(BootstrapIcons.mortarboard),
+                      ),
+                    ),
+                  ),
+                  Tab(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Colors.transparent, width: 1)),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Icon(Icons.work_outline),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -223,7 +286,7 @@ class _DashboardProviderState extends State<DashboardProvider> {
               child: Stack(children: [
                 TabBarView(
                   children: [
-                    cancelationAgree ? ProviderMap() : cancelFees(),
+                    ProviderMap(),
                     ListRequirements(),
                     AreasCoverage(),
                     Language(),
