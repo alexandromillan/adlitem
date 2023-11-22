@@ -20,6 +20,8 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -97,6 +99,8 @@ class _RegisterState extends State<Register> {
   }
 
   RegisterProvider() {
+    var size = MediaQuery.of(context).size;
+
     return Scaffold(
         floatingActionButton: FloatingActionButton.extended(
             onPressed: () {
@@ -121,13 +125,14 @@ class _RegisterState extends State<Register> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
                   child: Center(
                     child: Container(
                       padding: EdgeInsets.only(
                           left: 20, right: 20, top: 20, bottom: 20),
                       //margin: EdgeInsets.all(5),
-                      width: 480,
+                      width: size.width / 1.08,
                       decoration: BoxDecoration(
                           color: Color.fromARGB(255, 223, 226, 227),
                           borderRadius: BorderRadius.circular(30.0),
@@ -192,6 +197,7 @@ class _RegisterState extends State<Register> {
   }
 
   RegisterClient() {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
         floatingActionButton: FloatingActionButton.extended(
             onPressed: () {
@@ -216,13 +222,14 @@ class _RegisterState extends State<Register> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
                   child: Center(
                     child: Container(
                       padding: EdgeInsets.only(
                           left: 20, right: 20, top: 20, bottom: 20),
                       //margin: EdgeInsets.all(5),
-                      width: 480,
+                      width: size.width / 1.08,
                       decoration: BoxDecoration(
                           color: Color.fromARGB(255, 223, 226, 227),
                           borderRadius: BorderRadius.circular(30.0),

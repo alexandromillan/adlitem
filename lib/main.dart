@@ -76,75 +76,81 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       onGenerateRoute: routes,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(
-            titleTextStyle: TextStyle(
-                color: Colors.white,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),
-            backgroundColor: APP_COLORS.Primary,
-            centerTitle: true),
-        //primaryColor: Colors.amber,
-        hintColor: Colors.grey,
-        popupMenuTheme: PopupMenuThemeData(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-        textTheme: const TextTheme(
-            displayLarge: TextStyle(
-                color: Colors.white,
-                fontSize: 50.0,
-                fontWeight: FontWeight.bold),
-            titleLarge: TextStyle(
-                color: Colors.white,
-                fontSize: 16.0,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.bold),
-            bodyMedium: TextStyle(fontSize: 16.0, fontFamily: 'Arial'),
-            displaySmall: TextStyle(
-                color: Colors.white,
-                fontSize: 12.0,
-                fontWeight: FontWeight.bold)),
-      ),
+      theme: AppTheme(),
       home: Scaffold(
         body: Container(
           height: size.height,
           width: double.infinity,
           child: Stack(
             children: [
-              SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Container(
-                      height: size.height,
-                      child: !app.user.isLogged
-                          ? KLogin()
-                          : Layout(user: app.user),
-                      // child: InternetConectivity(
-                      //     widget: KLogin(title: "Welcome to Adlitem")),
-                    )
-                  ],
-                ),
-              ),
-              if (isLoading)
-                Container(
-                    constraints: BoxConstraints.expand(),
-                    alignment: Alignment.center,
-                    decoration:
-                        BoxDecoration(color: Color.fromRGBO(0, 0, 0, 0.1)),
-                    child: SizedBox(
-                        width: 50,
-                        height: 50,
-                        child: CircularProgressIndicator(
-                          valueColor: new AlwaysStoppedAnimation<Color>(
-                              APP_COLORS.Primary),
-                          backgroundColor: Color.fromARGB(0, 8, 6, 6),
-                          semanticsLabel: "Wait...",
-                          color: APP_COLORS.Primary,
-                        ))),
+              MainLayout(size, app),
+              if (isLoading) Loader(),
             ],
           ),
         ),
         backgroundColor: Colors.white,
+      ),
+    );
+  }
+
+  ThemeData AppTheme() {
+    return ThemeData(
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+          foregroundColor: Colors.white, backgroundColor: APP_COLORS.Primary),
+      appBarTheme: AppBarTheme(
+          foregroundColor: Colors.white,
+          titleTextStyle: TextStyle(
+              color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
+          backgroundColor: APP_COLORS.Primary,
+          centerTitle: true),
+      //primaryColor: Colors.amber,
+      hintColor: Colors.grey,
+      popupMenuTheme: PopupMenuThemeData(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+      textTheme: const TextTheme(
+          displayLarge: TextStyle(
+              color: Colors.white, fontSize: 50.0, fontWeight: FontWeight.bold),
+          titleLarge: TextStyle(
+              color: Colors.white,
+              fontSize: 16.0,
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.bold),
+          bodyMedium: TextStyle(fontSize: 16.0, fontFamily: 'Arial'),
+          displaySmall: TextStyle(
+              color: Colors.white,
+              fontSize: 12.0,
+              fontWeight: FontWeight.bold)),
+    );
+  }
+
+  Container Loader() {
+    return Container(
+        constraints: BoxConstraints.expand(),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(color: Color.fromRGBO(0, 0, 0, 0.1)),
+        child: SizedBox(
+            width: 50,
+            height: 50,
+            child: CircularProgressIndicator(
+              valueColor: new AlwaysStoppedAnimation<Color>(APP_COLORS.Primary),
+              backgroundColor: Color.fromARGB(0, 8, 6, 6),
+              semanticsLabel: "Wait...",
+              color: APP_COLORS.Primary,
+            )));
+  }
+
+  SingleChildScrollView MainLayout(Size size, AppProvider app) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            height: size.height,
+            child: !app.user.isLogged ? KLogin() : Layout(user: app.user),
+            // child: InternetConectivity(
+            //     widget: KLogin(title: "Welcome to Adlitem")),
+          )
+        ],
       ),
     );
   }

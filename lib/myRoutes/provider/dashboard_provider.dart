@@ -189,10 +189,13 @@ class _DashboardProviderState extends State<DashboardProvider> {
                             notifications.length.toString(),
                             style: TextStyle(
                                 fontSize: 12,
-                                color: Colors.amber,
+                                color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           ),
-                          child: Icon(BootstrapIcons.bell_fill),
+                          child: Icon(
+                            BootstrapIcons.bell_fill,
+                            color: Colors.white,
+                          ),
                         ),
                         itemBuilder: (BuildContext bc) {
                           return getListNoti();
@@ -202,10 +205,25 @@ class _DashboardProviderState extends State<DashboardProvider> {
                 "Provider Dashboard",
                 style: TextStyle(fontSize: 15.0, color: WHITE),
               ),
+              leading: Builder(
+                builder: (BuildContext context) {
+                  return IconButton(
+                    icon: const Icon(
+                      Icons.menu,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Scaffold.of(context).openDrawer();
+                    },
+                    tooltip:
+                        MaterialLocalizations.of(context).openAppDrawerTooltip,
+                  );
+                },
+              ),
               bottom: TabBar(
                 labelColor: Colors.redAccent,
                 unselectedLabelColor: Colors.white,
-                indicatorSize: TabBarIndicatorSize.label,
+                indicatorSize: TabBarIndicatorSize.tab,
                 indicator: BoxDecoration(
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(10),

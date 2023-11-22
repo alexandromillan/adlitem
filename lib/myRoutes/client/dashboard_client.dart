@@ -164,18 +164,39 @@ class _DashboardClientState extends State<DashboardClient> {
                       notifications.length.toString(),
                       style: TextStyle(
                           fontSize: 12,
-                          color: Colors.amber,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold),
                     ),
-                    child: Icon(BootstrapIcons.bell_fill),
+                    child: Icon(
+                      BootstrapIcons.bell_fill,
+                      color: Colors.white,
+                      size: 20,
+                    ),
                   ),
                   itemBuilder: (BuildContext bc) {
                     return getListNoti();
                   })),
         ],
-        // backgroundColor: APP_COLORS.Primary,
+
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(
+                Icons.menu,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            );
+          },
+        ), // backgroundColor: APP_COLORS.Primary,
       ),
+
       drawer: myDrawer(),
+      // drawerScrimColor:
+      //     Color.fromRGBO(25, 23, 235, 0.6), //completa el fondo del drawer
       body: ClientMap(),
     );
   }
